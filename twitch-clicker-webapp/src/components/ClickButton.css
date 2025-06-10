@@ -1,0 +1,17 @@
+.click-button {
+  margin: 20px 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  font-size: 48px;
+  background-color: #9147ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.click-button:active {
+  transform: scale(0.95);
+}
