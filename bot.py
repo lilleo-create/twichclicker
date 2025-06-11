@@ -5,8 +5,7 @@ import asyncio
 
 BOT_TOKEN = '8171808111:AAGso_hRbYNufz9mclqSY7RmSy3Mz1oaeuE'  # ВСТАВЬ свой TOKEN
 
-WEB_APP_URL = 'https://twitch-clicker-webapp-kwxoyaqyf-lilleos-projects.vercel.app'
-  # пока можешь заглушку поставить
+WEB_APP_URL = 'https://preeminent-biscotti-993d1b.netlify.app/'# пока можешь заглушку поставить
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
