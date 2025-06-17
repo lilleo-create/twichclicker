@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import MainSection from './components/MainSection';
 import BottomNav from './components/BottomNav';
+import Shop from './pages/Shop';
+
 import './App.css';
 
 function App() {
@@ -17,10 +21,15 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
-      <MainSection coins={coins} onClick={handleClick} />
-      <BottomNav />
-    </div>
+    <Router>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<MainSection coins={coins} onClick={handleClick} />} />
+          <Route path="/shop" element={<Shop />} />
+        </Routes>
+        <BottomNav />
+      </div>
+    </Router>
   );
 }
 

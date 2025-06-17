@@ -1,17 +1,25 @@
-.click-button {
-  margin: 20px 0;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  font-size: 48px;
-  background-color: #9147ff;
-  border: none;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-  transition: transform 0.2s ease;
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 16px 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 20;
 }
 
-.click-button:active {
-  transform: scale(0.95);
+.nav-icon {
+  width: 42px;
+  height: 42px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.nav-icon:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 12px #9147ff);
+  cursor: pointer;
 }

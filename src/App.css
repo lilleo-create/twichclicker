@@ -3,7 +3,9 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #6441a5, #2a0845);
+  background-image: url(./assets/background.png);
+  background-size: cover;
+  background-position: calc(90% + 50px) center;
   color: white;
 }
 
