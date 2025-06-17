@@ -1,12 +1,21 @@
 
 body {
-  margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
   background-image: url(./assets/background.png);
   background-size: cover;
   background-position: calc(90% + 50px) center;
   color: white;
+  box-sizing: border-box;
+  overflow: hidden;  
+}
+
+button {
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .container {
@@ -15,4 +24,5 @@ body {
   align-items: center;
   gap: 100px;
   justify-content: center;
+
 }

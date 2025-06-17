@@ -1,25 +1,12 @@
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 16px 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 20;
+
+.click-button {
+  background: none;
+  border: none;
+  max-width: 400px;
+  max-height: 400px;
 }
 
-.nav-icon {
-  width: 42px;
-  height: 42px;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-}
-
-.nav-icon:hover {
-  transform: scale(1.2);
-  filter: drop-shadow(0 0 12px #9147ff);
-  cursor: pointer;
+.image-click {
+    max-width: 100%;
+  max-height: 100%;
 }

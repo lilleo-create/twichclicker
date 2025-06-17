@@ -8,21 +8,21 @@ import { Link } from 'react-router-dom';
 function BottomNav() {
   return (
     <div className="bottom-nav">
-      <button>
+      <Link to="#">
         <img src={achievementIcon} alt="Achievements" className="nav-icon" />
-      </button>
+      </Link>
 
       <Link to="/shop">
         <img src={shoppingCart} alt="Shop" className="nav-icon" />
       </Link>
 
-      <button>
+      <Link to="#">
         <img src={bonus} alt="Bonus" className="nav-icon" />
-      </button>
+      </Link>
 
-      <button>
+      <Link to="#">
         <img src={settings} alt="Settings" className="nav-icon" />
-      </button>
+      </Link>
     </div>
   )
 }
