@@ -1,12 +1,14 @@
-
 .click-button {
-  background: none;
-  border: none;
-  max-width: 400px;
-  max-height: 400px;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  width: min(35vw, 300px);
+  -webkit-tap-highlight-color: transparent; /* ← отключает синий/чёрный эффект на iOS */
 }
 
+
 .image-click {
-    max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: auto;
 }
