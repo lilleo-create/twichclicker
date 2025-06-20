@@ -1,20 +1,12 @@
-import { motion } from "framer-motion";
-import ButtonClick from "../assets/ButtonClick.png";
-
-function ClickButton({ handleClick }) {
+const ClickButton = ({ onClick }) => {
   return (
-    <motion.button
-      onClick={handleClick}
-      whileTap={{ scale: 0.92 }}
-      className="w-[120px] h-[120px] p-0 border-none bg-transparent rounded-full overflow-hidden"
+    <button
+      onClick={onClick}
+      className="bg-blue-500 hover:bg-blue-700 text-white text-3xl font-bold py-4 px-8 rounded-full shadow-lg active:scale-95 transition-transform"
     >
-      <img
-        src={ButtonClick}
-        alt="Click"
-        className="w-full h-full object-contain pointer-events-none"
-      />
-    </motion.button>
+      😄
+    </button>
   );
-}
+};
 
 export default ClickButton;
