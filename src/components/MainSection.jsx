@@ -1,13 +1,17 @@
-// src/components/MainSection.jsx
-import React from 'react';
-import ClickButton from './ClickButton';
+import MouseClicker from './MouseClicker';
+import { useState } from 'react';
 
-const MainSection = ({ coins, onClick }) => {
+const MainSection = () => {
+  const [points, setPoints] = useState(0);
+
+  const handleClick = () => {
+    setPoints((prev) => prev + 1);
+  };
+
   return (
-    <main className="flex flex-col items-center justify-center flex-1 text-center p-4">
-      <h1 className="text-4xl font-bold text-white mb-4">{coins}</h1>
-      <p className="text-sm text-purple-300 mb-6">Очки хайпа</p>
-      <ClickButton onClick={onClick} />
+    <main className="flex flex-col items-center justify-center gap-40 flex-1 text-center p-4">
+      <h1 className="text-4xl font-bold text-white mb-4">{points}</h1>
+      <MouseClicker onClick={handleClick} />
     </main>
   );
 };
