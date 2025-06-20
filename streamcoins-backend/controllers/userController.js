@@ -1,41 +1,44 @@
-import User from '../models/User.js';
+// controllers/userController.js
+const User = require('../models/User');
 
-// Получение данных по userId
-export const getUser = async (req, res) => {
+// Получение данных пользователя
+const getUser = async (req, res) => {
   const { id } = req.params;
+  try {
+    const user = await User.findOne({ userId: id });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Обновление или создание данных пользователя
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
 
   try {
     let user = await User.findOne({ userId: id });
 
     if (!user) {
-      user = await User.create({ userId: id });
+      // Создаём нового пользователя
+      user = new User({ userId: id, ...updates });
+    } else {
+      // Обновляем существующего
+      Object.assign(user, updates);
     }
 
+    await user.save();
     res.json(user);
   } catch (err) {
-    res.status(500).json({ error: 'Ошибка сервера' });
+    res.status(500).json({ message: err.message });
   }
 };
 
-// Обновление очков и прогресса
-export const updateUser = async (req, res) => {
-  const { id } = req.params;
-  const { coins, upgrades, progress } = req.body;
-
-  try {
-    const user = await User.findOneAndUpdate(
-      { userId: id },
-      {
-        coins,
-        upgrades,
-        progress,
-        lastVisit: new Date()
-      },
-      { new: true, upsert: true }
-    );
-
-    res.json(user);
-  } catch (err) {
-    res.status(500).json({ error: 'Ошибка обновления' });
-  }
+module.exports = {
+  getUser,
+  updateUser,
 };
