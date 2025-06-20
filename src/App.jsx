@@ -32,7 +32,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col justify-between bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(/src/assets/background.png)` }}>
+      <div className="min-h-screen flex flex-col justify-between bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('/background.png')` }}>
         <Routes>
           <Route path="/" element={<MainSection coins={points} onClick={handleClick} />} />
           <Route path="/shop" element={<Shop />} />

@@ -2,8 +2,7 @@ const ClickButton = ({ onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="bg-blue-500 hover:bg-blue-700 text-white text-3xl font-bold py-4 px-8 rounded-full shadow-lg active:scale-95 transition-transform"
-    >
+      className="w-32 h-24 text-5xl bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg">
       😄
     </button>
   );

@@ -9,3 +9,14 @@ module.exports = {
   },
   plugins: [],
 }
+module.exports = {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      backgroundImage: {
+        'main-bg': "url('/assets/background.png')",
+      },
+    },
+  },
+  plugins: [],
+};
