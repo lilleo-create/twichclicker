@@ -6,17 +6,21 @@ const MouseClicker = ({ onClick }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
-    if (window.Telegram && Telegram.WebApp) {
+    if (window.Telegram?.WebApp) {
       Telegram.WebApp.ready();
+      Telegram.WebApp.sendData(JSON.stringify({ test: "hello from frontend" }));
+      console.log("✅ TG WebApp initialized and test sent");
+    } else {
+      console.warn("❌ Telegram WebApp not available");
     }
   }, []);
 
   const handleClick = () => {
     setIsPressed(true);
 
-    // Отправляем данные в Telegram-бота
-    if (window.Telegram && Telegram.WebApp) {
+    if (window.Telegram?.WebApp) {
       Telegram.WebApp.sendData(JSON.stringify({ clicks: 1 }));
+      console.log("📤 Sent clicks: 1");
     }
 
     onClick?.();
