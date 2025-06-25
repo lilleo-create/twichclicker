@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import clickIcon from "../assets/icon-click.png";
 
 const MouseClicker = ({ onClick }) => {
   const [isPressed, setIsPressed] = useState(false);
 
+  useEffect(() => {
+    if (window.Telegram && Telegram.WebApp) {
+      Telegram.WebApp.ready();
+    }
+  }, []);
+
   const handleClick = () => {
     setIsPressed(true);
+
+    // Отправляем данные в Telegram-бота
+    if (window.Telegram && Telegram.WebApp) {
+      Telegram.WebApp.sendData(JSON.stringify({ clicks: 1 }));
+    }
+
     onClick?.();
     setTimeout(() => setIsPressed(false), 100);
   };
