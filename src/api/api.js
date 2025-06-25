@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL;
+const API_BASE = 'https://preeminent-biscotti-993d1b.netlify.app/';
 
 export const getUserData = async (userId) => {
   const res = await fetch(`${API_BASE}/api/user/${userId}`);
