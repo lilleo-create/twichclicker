@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import mouseBody from "../assets/mouse-body.png";
-import mouseButton from "../assets/mouse-button-left.png";
+import clickIcon from "../assets/icon-click.png";
 
 const MouseClicker = ({ onClick }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -13,28 +12,22 @@ const MouseClicker = ({ onClick }) => {
   };
 
   return (
-    <div
-      className="relative w-[80vw] max-w-[180px] aspect-[3/5] cursor-pointer select-none"
+    <motion.div
       onClick={handleClick}
+      whileTap={{ scale: 0.96 }}
+      className="w-[131px] h-[130px] rounded-full flex items-center justify-center select-none"
+      style={{
+        background: "linear-gradient(to bottom right, #C9ABD4, #6B4479)",
+        boxShadow: "0px 5px 4px rgba(0, 0, 0, 0.25)"
+      }}
     >
-      {/* Фон мыши */}
       <img
-        src={mouseBody}
-        alt="Mouse Body"
-        className="absolute top-0 left-0 w-full h-full"
+        src={clickIcon}
+        alt="Click"
+        className="w-10 h-10 pointer-events-none"
         draggable={false}
       />
-
-      {/* Кнопка */}
-      <motion.img
-        src={mouseButton}
-        alt="Left Button"
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
-        animate={{ scale: isPressed ? 0.993 : 1 }}
-        transition={{ duration: 0.1 }}
-        draggable={false}
-      />
-    </div>
+    </motion.div>
   );
 };
 
