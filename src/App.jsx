@@ -1,15 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainSection from './components/MainSection';
-import Shop from './components/Shop';
-import BottomNav from './components/BottomNav';
-
-import './App.css';
-import { useState, useEffect } from 'react';
-import { getUserData, saveUserData } from './api/api';
-
-function App() {
+const App = () => {
   const tg = window?.Telegram?.WebApp;
-  const userId = tg?.initDataUnsafe?.user?.id || 'debug-user-id';
+  const userId = tg?.initDataUnsafe?.user?.id;
+
+
+console.log("👤 Telegram User ID:", userId);
+
   const [points, setPoints] = useState(0);
 
   useEffect(() => {
@@ -30,6 +25,10 @@ function App() {
     saveUserData(userId, { points: newPoints });
   };
 
+  if (!userId) {
+    return <div className="text-white p-4">Ошибка: пользователь Telegram не определён</div>;
+  }
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col justify-between bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('/background.png')` }}>
@@ -41,6 +40,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
