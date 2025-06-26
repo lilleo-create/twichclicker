@@ -14,7 +14,7 @@ const MouseClicker = ({ onClick }) => {
 
   return (
     <div
-      className="relative w-[80vw] max-w-[180px] aspect-[3/5] cursor-pointer select-none"
+      className="relative w-[80vw] max-w-[120px] aspect-[3/5] cursor-pointer select-none"
       onClick={handleClick}
     >
       {/* Фон мыши */}
