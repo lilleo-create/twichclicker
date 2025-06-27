@@ -28,3 +28,17 @@ export const saveUserData = async (userId, data) => {
   });
 };
 
+export const loadUserData = async (userId) => {
+  try {
+    const response = await fetch(`/api/user/${userId}`);
+    if (!response.ok) {
+      throw new Error(`Ошибка загрузки: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('❌ Ошибка при загрузке данных:', error);
+    return null;
+  }
+};
+
+
