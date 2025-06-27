@@ -1,5 +1,6 @@
 const API_BASE = 'https://streamcoins.ru';
 
+
 export const getUserData = async (userId) => {
   const res = await fetch(`https://streamcoins.ru/api/user/${userId}`);
   if (!res.ok) {
@@ -8,7 +9,6 @@ export const getUserData = async (userId) => {
   }
   return res.json();
 };
-
 
 export const saveUserData = async (userId, data) => {
   await fetch(`${API_BASE}/api/user/${userId}`, {
