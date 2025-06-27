@@ -1,18 +1,13 @@
+import React from 'react';
+import Counter from './Counter';
 import MouseClicker from './MouseClicker';
-import { useState } from 'react';
 
-const MainSection = () => {
-  const [points, setPoints] = useState(0);
-
-  const handleClick = () => {
-    setPoints((prev) => prev + 1);
-  };
-
+const MainSection = ({ coins, onClick }) => {
   return (
-    <main className="flex flex-col items-center justify-center gap-40 flex-1 text-center p-4">
-      <h1 className="text-4xl font-bold text-white mb-4">{points}</h1>
-      <MouseClicker onClick={handleClick} />
-    </main>
+    <div className="flex flex-col items-center justify-center gap-40 pt-12">
+      <Counter coins={coins} />
+      <MouseClicker onClick={onClick} />
+    </div>
   );
 };
 

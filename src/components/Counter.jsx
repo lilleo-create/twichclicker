@@ -1,11 +1,9 @@
-
-function Counter({ coins }) {
+const Counter = ({ coins }) => {
   return (
-    <div className="text-white text-center">
-      <h1 className="text-4xl font-bold">{coins}</h1>
-      <p className="text-sm opacity-80">Hype Points</p>
+    <div className="text-center">
+      <h1 className="text-5xl font-bold text-white">{coins}</h1>
     </div>
   );
-}
+};
 
 export default Counter;

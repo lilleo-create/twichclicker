@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainSection from './components/MainSection';
 import Shop from './components/Shop';
@@ -13,9 +13,6 @@ function App() {
   useEffect(() => {
     if (tg) {
       tg.ready();
-      console.log("✅ Telegram WebApp is ready");
-    } else {
-      console.warn("❌ Telegram WebApp is not available");
     }
   }, []);
 
