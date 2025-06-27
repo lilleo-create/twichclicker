@@ -25,7 +25,8 @@ const MouseClicker = ({ onClick }) => {
   };
 
   return (
-    <motion.div
+    <div
+      className="relative w-[80vw] max-w-[180px] aspect-[3/5] cursor-pointer select-none"
       onClick={handleClick}
       whileTap={{ scale: 0.96 }}
       className="w-[131px] h-[130px] rounded-full flex items-center justify-center select-none"
