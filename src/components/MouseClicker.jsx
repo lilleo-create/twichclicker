@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import clickIcon from '../assets/mouse-button-left-BahizTEa.png'; // проверь путь!
 import { saveUserData, getUserId } from '../api/api';
 
 const MouseClicker = () => {
