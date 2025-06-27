@@ -1,13 +1,11 @@
-import './Сounter.css';
-
 
 function Counter({ coins }) {
   return (
-    <div className="сounter">
-      <h1>{coins}</h1>
-      <p>Hype Points</p>
+    <div className="text-white text-center">
+      <h1 className="text-4xl font-bold">{coins}</h1>
+      <p className="text-sm opacity-80">Hype Points</p>
     </div>
-  )
+  );
 }
 
-export default Counter
+export default Counter;
