@@ -3,33 +3,15 @@ import { motion } from "framer-motion";
 import clickIcon from "../assets/icon-click.png";
 
 const MouseClicker = ({ onClick }) => {
-  const [isPressed, setIsPressed] = useState(false);
-
-  useEffect(() => {
-    if (window.Telegram?.WebApp) {
-      Telegram.WebApp.ready();
-      console.log("✅ Telegram WebApp is available");
-    } else {
-      console.warn("❌ Telegram WebApp not available");
-    }
-  }, []);
-
   const handleClick = () => {
-    setIsPressed(true);
-    if (window.Telegram?.WebApp) {
-      Telegram.WebApp.sendData(JSON.stringify({ clicks: 1 }));
-      console.log("📤 Sent clicks: 1");
-    }
     onClick?.();
-    setTimeout(() => setIsPressed(false), 100);
   };
 
   return (
-    <div
-      className="relative w-[80vw] max-w-[180px] aspect-[3/5] cursor-pointer select-none"
+    <motion.div
       onClick={handleClick}
       whileTap={{ scale: 0.96 }}
-      className="w-[131px] h-[130px] rounded-full flex items-center justify-center select-none"
+      className="relative w-[80vw] max-w-[180px] aspect-[3/5] w-[131px] h-[130px] rounded-full flex items-center justify-center cursor-pointer select-none"
       style={{
         background: "linear-gradient(to bottom right, #C9ABD4, #6B4479)",
         boxShadow: "0px 5px 4px rgba(0, 0, 0, 0.25)"
