@@ -1,14 +1,14 @@
-const API_BASE = 'https://streamcoins.ru';
-
+const API_BASE = 'https://api.streamcoins.ru';
 
 export const getUserData = async (userId) => {
-  const res = await fetch(`https://streamcoins.ru/api/user/${userId}`);
+  const res = await fetch(`${API_BASE}/api/user/${userId}`);
   if (!res.ok) {
     console.error('Ошибка загрузки данных:', res.status);
     return {};
   }
   return res.json();
 };
+
 
 export const getUserId = () => {
   if (typeof window !== 'undefined' && window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {

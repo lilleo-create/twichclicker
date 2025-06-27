@@ -10,6 +10,17 @@ function App() {
   const userId = tg?.initDataUnsafe?.user?.id;
   const [points, setPoints] = useState(0);
 
+  if (!userId) {
+    alert("Ошибка: Telegram WebApp не передал user.id");
+    return;
+  }
+  
+  app.use(cors({
+  origin: ["https://t.me", "https://web.telegram.org", "https://streamcoins.ru"],
+  credentials: true
+}));
+
+
   useEffect(() => {
     if (tg) {
       tg.ready();
