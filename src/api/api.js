@@ -1,3 +1,6 @@
+const API_BASE = 'https://streamcoins.ru';
+
+
 export const getUserData = async (userId) => {
   const res = await fetch(`https://streamcoins.ru/api/user/${userId}`);
   if (!res.ok) {
@@ -19,8 +22,9 @@ export const saveUserData = async (userId, data) => {
   await fetch(`${API_BASE}/api/user/${userId}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 };
+
