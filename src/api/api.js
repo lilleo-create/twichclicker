@@ -7,6 +7,14 @@ export const getUserData = async (userId) => {
   return res.json();
 };
 
+export const getUserId = () => {
+  if (typeof window !== 'undefined' && window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
+    return window.Telegram.WebApp.initDataUnsafe.user.id;
+  }
+  return 'test'; // fallback для браузера
+};
+
+
 export const saveUserData = async (userId, data) => {
   await fetch(`${API_BASE}/api/user/${userId}`, {
     method: 'PUT',
