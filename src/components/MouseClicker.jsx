@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import clickIcon from '../assets/icon-click.svg';
 import { saveUserData, getUserId } from '../api/api';
 
 const MouseClicker = () => {
