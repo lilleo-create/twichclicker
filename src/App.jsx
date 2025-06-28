@@ -44,7 +44,7 @@ function App() {
       <div className="min-h-screen flex flex-col justify-between bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('/background.png')` }}>
         <Routes>
           <Route path="/" element={<MainSection coins={points} onClick={handleClick} />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop" element={<Shop coins={points} setCoins={setPoints} userId={userId} />} />
         </Routes>
         <BottomNav />
       </div>
@@ -52,4 +52,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
