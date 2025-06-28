@@ -7,30 +7,19 @@ import { getUserData, saveUserData } from './api/api';
 
 function App() {
   const tg = window?.Telegram?.WebApp;
-  const userId = tg?.initDataUnsafe?.user?.id;
+  const userId = tg?.initDataUnsafe?.user?.id || null;
   const [points, setPoints] = useState(0);
 
-  if (!userId) {
-    alert("Ошибка: Telegram WebApp не передал user.id");
-    return;
-  }
-  
-  app.use(cors({
-  origin: ["https://t.me", "https://web.telegram.org", "https://streamcoins.ru"],
-  credentials: true
-}));
-
-
   useEffect(() => {
-    if (tg) {
-      tg.ready();
-    }
+    if (tg) tg.ready();
   }, []);
 
   useEffect(() => {
     if (userId) {
       getUserData(userId).then((data) => {
-        if (data?.points) setPoints(data.points);
+        if (data?.coins !== undefined) {
+          setPoints(data.coins);
+        }
       });
     }
   }, [userId]);
@@ -38,8 +27,17 @@ function App() {
   const handleClick = () => {
     const newPoints = points + 1;
     setPoints(newPoints);
-    saveUserData(userId, { points: newPoints });
+    saveUserData(userId, { coins: newPoints });
   };
+
+  if (!userId) {
+    return (
+      <div className="text-white p-4 text-center">
+        <p>Ошибка: Telegram WebApp не передал <code>user.id</code></p>
+        <p>Пожалуйста, открой мини-приложение через Telegram → кнопку «Открыть игру»</p>
+      </div>
+    );
+  }
 
   return (
     <Router>
