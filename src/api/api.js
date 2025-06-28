@@ -1,15 +1,5 @@
 const API_BASE = 'https://api.streamcoins.ru';
 
-export const getUserData = async (userId) => {
-  const res = await fetch(`${API_BASE}/api/user/${userId}`);
-  if (!res.ok) {
-    console.error('Ошибка загрузки данных:', res.status);
-    return {};
-  }
-  return res.json();
-};
-
-
 export const getUserId = () => {
   if (typeof window !== 'undefined' && window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
     return window.Telegram.WebApp.initDataUnsafe.user.id;
@@ -17,28 +7,33 @@ export const getUserId = () => {
   return 'test'; // fallback для браузера
 };
 
-
-export const saveUserData = async (userId, data) => {
-  await fetch(`${API_BASE}/api/user/${userId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-};
-
-export const loadUserData = async (userId) => {
+export const getUserData = async (userId) => {
   try {
-    const response = await fetch(`/api/user/${userId}`);
-    if (!response.ok) {
-      throw new Error(`Ошибка загрузки: ${response.status}`);
+    const res = await fetch(`${API_BASE}/api/user/${userId}`);
+    if (!res.ok) {
+      console.error('Ошибка загрузки данных:', res.status);
+      return {};
     }
-    return await response.json();
-  } catch (error) {
-    console.error('❌ Ошибка при загрузке данных:', error);
-    return null;
+    return await res.json();
+  } catch (err) {
+    console.error('❌ Ошибка при получении данных:', err);
+    return {};
   }
 };
 
-
+export const saveUserData = async (userId, data) => {
+  try {
+    const res = await fetch(`${API_BASE}/api/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) {
+      console.error('Ошибка при сохранении данных:', res.status);
+    }
+  } catch (err) {
+    console.error('❌ Ошибка при сохранении данных:', err);
+  }
+};

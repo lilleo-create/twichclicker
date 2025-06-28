@@ -8,10 +8,18 @@ dotenv.config();
 
 const app = express();
 
+// Доверять прокси (важно для корректной работы редиректов и CORS через nginx)
+app.set('trust proxy', true);
+
+// Заглушка для корневого роута
+app.get('/', (req, res) => {
+  res.send('✅ StreamCoins API is running!');
+});
+
 // Middleware
 app.use(express.json());
 
-// Разрешаем CORS только с Netlify и твоего домена
+// CORS – только разрешённые источники
 app.use(cors({
   origin: [
     'https://streamcoins.ru',
@@ -23,7 +31,7 @@ app.use(cors({
 // Роуты
 app.use('/api/user', userRoutes);
 
-// Подключение к MongoDB
+// Подключение к MongoDB и старт сервера
 const startServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
