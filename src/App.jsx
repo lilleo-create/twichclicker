@@ -39,17 +39,28 @@ function App() {
     );
   }
 
-  return (
-    <Router>
-      <div className="min-h-screen flex flex-col justify-between bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('/background.png')` }}>
-        <Routes>
-          <Route path="/" element={<MainSection coins={points} onClick={handleClick} />} />
-          <Route path="/shop" element={<Shop coins={points} setCoins={setPoints} userId={userId} />} />
-        </Routes>
-        <BottomNav />
-      </div>
-    </Router>
-  );
+<Router>
+  <div className="relative min-h-screen flex flex-col justify-between overflow-hidden">
+    {/* 🎥 Видео-фон */}
+    <video
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
+    >
+      <source src="/bg_loop.mp4" type="video/mp4" />
+    </video>
+
+    {/* 📱 Контент поверх */}
+    <Routes>
+      <Route path="/" element={<MainSection coins={points} onClick={handleClick} />} />
+      <Route path="/shop" element={<Shop coins={points} setCoins={setPoints} userId={userId} />} />
+    </Routes>
+    <BottomNav />
+  </div>
+</Router>
 }
+
 
 export default App
