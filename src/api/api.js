@@ -9,7 +9,10 @@ export const getUserId = () => {
 
 export const getUserData = async (userId) => {
   try {
-    const res = await fetch(`${API_BASE}/api/user/${userId}`);
+    const res = await fetch(`${API_BASE}/api/user/${userId}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
     if (!res.ok) {
       console.error('Ошибка загрузки данных:', res.status);
       return {};
@@ -28,6 +31,7 @@ export const saveUserData = async (userId, data) => {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(data),
     });
     if (!res.ok) {
