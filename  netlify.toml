@@ -1,9 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "rm -rf dist && npm run build"
   publish = "dist"
+  environment = { NODE_VERSION = "18" }  # ← ключевой фикс
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-NODE_VERSION = "18"

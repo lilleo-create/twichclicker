@@ -1,12 +1,11 @@
-// vite.config.js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/', // обязательно!
+  base: './', // ← важно для относительных путей в WebView
   plugins: [react()],
   build: {
     target: 'es2015',
-    outDir: 'dist'
-  }
-})
+    outDir: 'dist',
+  },
+});
