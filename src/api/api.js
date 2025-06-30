@@ -4,8 +4,11 @@ export const getUserId = () => {
   if (typeof window !== 'undefined' && window.Telegram?.WebApp?.initDataUnsafe?.user?.id) {
     return window.Telegram.WebApp.initDataUnsafe.user.id;
   }
-  return 'test'; // fallback для браузера
+
+  // Верни null вместо test, если работаешь в Telegram WebView
+  return null;
 };
+
 
 export const getUserData = async (userId) => {
   try {
