@@ -6,26 +6,14 @@ import BottomNav from './components/BottomNav';
 import { getUserData, saveUserData } from './api/api';
 
 function App() {
-  const [isReady, setIsReady] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const tg = window?.Telegram?.WebApp;
+  const userId = tg?.initDataUnsafe?.user?.id || null;
   const [points, setPoints] = useState(0);
 
-  // ✅ Ожидание загрузки Telegram SDK
   useEffect(() => {
-    const tg = window?.Telegram?.WebApp;
-
-    if (tg) {
-      tg.ready();
-
-      const id = tg?.initDataUnsafe?.user?.id;
-      if (id) {
-        setUserId(id);
-        setIsReady(true);
-      }
-    }
+    if (tg) tg.ready();
   }, []);
 
-  // ✅ Загрузка данных пользователя
   useEffect(() => {
     if (userId) {
       getUserData(userId).then((data) => {
@@ -36,32 +24,24 @@ function App() {
     }
   }, [userId]);
 
-  // ✅ Обработка клика
   const handleClick = () => {
     const newPoints = points + 1;
     setPoints(newPoints);
-    if (userId) {
-      saveUserData(userId, { coins: newPoints });
-    }
+    saveUserData(userId, { coins: newPoints });
   };
 
-  // ❗ Пока не готов Telegram — показываем заглушку
-  if (!isReady) {
+  if (!userId) {
     return (
-      <div className="text-black p-4 text-center">
-        <p>⏳ Загрузка...</p>
-        <p className="text-sm opacity-70 mt-2">
-          Убедитесь, что вы открыли мини-приложение через Telegram
-        </p>
+      <div className="text-white p-4 text-center">
+        <p>Ошибка: Telegram WebApp не передал <code>user.id</code></p>
+        <p>Пожалуйста, открой мини-приложение через Telegram → кнопку «Открыть игру»</p>
       </div>
     );
   }
 
-  // ✅ Основной рендер
   return (
     <Router>
       <div className="relative min-h-screen flex flex-col justify-between overflow-hidden">
-        {/* 🎥 Видео-фон */}
         <video
           autoPlay
           loop
@@ -72,12 +52,10 @@ function App() {
           <source src="/bg_loop.mp4" type="video/mp4" />
         </video>
 
-        {/* 📱 Контент */}
         <Routes>
           <Route path="/" element={<MainSection coins={points} onClick={handleClick} />} />
           <Route path="/shop" element={<Shop coins={points} setCoins={setPoints} userId={userId} />} />
         </Routes>
-
         <BottomNav />
       </div>
     </Router>
