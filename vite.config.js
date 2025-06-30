@@ -2,10 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/',
   plugins: [react()],
   build: {
-    target: 'es2015', // важно!
+    target: 'es2015',  // обязательно
+    outDir: 'dist',
   },
 })
-
