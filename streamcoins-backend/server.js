@@ -10,6 +10,10 @@ const app = express();
 
 app.set('trust proxy', true); // Оставляем
 
+app.get('/api/ping', (req, res) => {
+  res.json({ message: 'pong' });
+});
+
 app.get('/', (req, res) => {
   res.send('✅ StreamCoins API is running!');
 });
