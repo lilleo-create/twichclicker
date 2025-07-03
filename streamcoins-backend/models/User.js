@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
   upgrades: {
     type: Object,
     default: {},
-  },  
+  },
+  viewers: {
+    type: Number,
+    default: 0,
+  },
   lastVisit: {
     type: Date,
     default: Date.now,
