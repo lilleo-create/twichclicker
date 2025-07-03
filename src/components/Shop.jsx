@@ -1,67 +1,86 @@
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { saveUserData } from '../api/api';
+import { UPGRADE_CONFIG } from '../config/upgradesConfig';
+import { useNavigate } from 'react-router-dom';
+import BackButton from './BackButton.jsx';
 
-function Shop({ coins, setCoins, userId }) {
-  const upgrades = [
-    { name: "Webcam", price: 50, icon: "📷" },
-    { name: "Mic", price: 80, icon: "🎤" },
-    { name: "Chair", price: 120, icon: "🪑" },
-    { name: "Monitor", price: 150, icon: "🖥️" },
-    { name: "Router", price: 90, icon: "📡" },
-  ];
+function getUpgradePrice(upgrade, quantity) {
+  return Math.floor(upgrade.basePrice * Math.pow(upgrade.priceMultiplier, quantity));
+}
 
-  const handleBuy = (item) => {
-    if (coins < item.price) return;
-    const newCoins = coins - item.price;
+export default function Shop({ coins, setCoins, userId, upgrades, setUpgrades }) {
+  const navigate = useNavigate();
+
+  const handleBuy = (upgrade) => {
+    const quantity = upgrades[upgrade.id] || 0;
+    const cost = getUpgradePrice(upgrade, quantity);
+    if (coins < cost) return;
+
+    const newQuantity = quantity + 1;
+    const newCoins = coins - cost;
+    const newUpgrades = {
+      ...upgrades,
+      [upgrade.id]: newQuantity,
+    };
+
     setCoins(newCoins);
-    saveUserData(userId, { coins: newCoins });
-  };
+    setUpgrades(newUpgrades);
+
+    saveUserData(userId, {
+      coins: newCoins,
+      upgrades: newUpgrades,
+    })
+      .then(() => {
+        console.log('✅ Сохранение успешно', { coins: newCoins, upgrades: newUpgrades });
+      })
+      .catch((err) => {
+        console.error('❌ Ошибка при сохранении:', err);
+      });
+    }
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-b from-purple-900 to-purple-700 text-white p-4 flex flex-col items-center gap-6"
+      className="min-h-screen bg-black/50 text-white px-4 py-6 font-sans flex flex-col items-center"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4 }}
     >
-      <h1 className="text-3xl font-bold">🛒 Shop</h1>
+      <h2 className="text-2xl font-bold mb-6 text-center">🛒 Магазин апгрейдов</h2>
 
-      <div className="text-white text-sm mb-2">Ваш баланс: <b>{coins} pts</b></div>
+      <div className="flex flex-col gap-4 w-full max-w-md">
+        {UPGRADE_CONFIG.map((upgrade) => {
+          const quantity = upgrades[upgrade.id] || 0;
+          const price = getUpgradePrice(upgrade, quantity);
+          const isBought = !upgrade.stackable && quantity > 0;
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-md">
-        {upgrades.map((item, index) => (
-          <div
-            key={index}
-            className="bg-purple-800 p-4 rounded-xl shadow-lg flex flex-col items-center text-center"
-          >
-            <div className="text-4xl">{item.icon}</div>
-            <div className="mt-2 font-semibold">{item.name}</div>
-            <div className="text-sm text-purple-300">{item.price} pts</div>
-            <button
-              onClick={() => handleBuy(item)}
-              disabled={coins < item.price}
-              className={`mt-3 px-4 py-1 rounded font-bold transition ${
-                coins < item.price
-                  ? 'bg-gray-500 text-white cursor-not-allowed'
-                  : 'bg-white text-purple-800 hover:bg-purple-100'
-              }`}
+          return (
+            <div
+              key={upgrade.id}
+              className="border border-gray-600 bg-black/40 p-4 rounded-md shadow"
             >
-              Buy
-            </button>
-          </div>
-        ))}
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-semibold">{upgrade.name}</div>
+                  <div className="text-sm text-gray-400">
+                    Уровень: {quantity} | +{upgrade.clickBonus} к клику
+                  </div>
+                </div>
+                <button
+                  disabled={isBought || coins < price}
+                  onClick={() => handleBuy(upgrade)}
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded disabled:opacity-50 text-sm"
+                >
+                  {isBought ? 'Куплено' : `Купить за ${price}`}
+                </button>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      <Link
-        to="/"
-        className="text-sm mt-6 underline text-purple-200 hover:text-white transition"
-      >
-        ⬅ Back
-      </Link>
+      <BackButton to="/" label="⬅ Назад в игру" />
     </motion.div>
   );
 }
-
-export default Shop;

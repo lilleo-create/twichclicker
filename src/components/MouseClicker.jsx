@@ -9,7 +9,7 @@ const MouseClicker = ({ onClick }) => {
       onClick={onClick}
     >
       <div
-        className="w-[131px] h-[130px] rounded-full flex items-center justify-center"
+        className="w-[170px] h-[170px] rounded-full flex items-center justify-center"
         style={{
           background: 'linear-gradient(to bottom right, #C9ABD4, #6B4479)',
           boxShadow: '0px 5px 4px rgba(0, 0, 0, 0.25)',

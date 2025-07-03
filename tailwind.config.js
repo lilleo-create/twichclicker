@@ -20,3 +20,14 @@ module.exports = {
   },
   plugins: [],
 };
+// tailwind.config.js
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'], // заменит font-sans по умолчанию
+    }  
+  },
+  plugins: [],
+}
+

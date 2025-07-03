@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema({
     default: 0,
   },
   upgrades: {
-    type: [String], // или позже сделаем массив объектов
-    default: [],
-  },
+    type: Object,
+    default: {},
+  },  
   lastVisit: {
     type: Date,
     default: Date.now,
